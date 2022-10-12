@@ -3,6 +3,9 @@
 # 2. Detectaremos la presencia de N instancias dentro de una lista, en cualquier posición
 # 3. Detectaremos la presencia de N elementos SEGUIDOS dentro de una lista.
 
+from unittest import result
+
+
 def find_one(list, needle):
     """
     Devuelve True si encuentra a needle en la lista en alguna posición
@@ -72,3 +75,37 @@ def find_streak(list, element, size):
 # find_streak([0, 7, 7], 7, 3)
 
 
+def first_elements(list_of_list):
+    '''
+    recibe una matriz, lista de lista y devuelve una lista con los primrtod
+    elementos de cada una de las listas de la matriz
+    '''
+
+    result = []
+    
+    return nth_elements(list_of_list,0)
+
+matrix = first_elements([[1,2,3], [1,2,3], [3,4,5]])
+
+def nth_elements(list_of_list,n):
+    result = []
+    for sub_list in list_of_list:
+        result.append(sub_list[n])
+    return result 
+
+def  transpose(list_of_list):
+    '''
+    Recibe uns mstrix y devueve su transformacion\ transpuesta
+    '''
+    transp = []
+    for index in range(len(list_of_list)):
+        transp.append(nth_elements(list_of_list, index))
+    return transp
+    
+    
+    
+    #for index, sub_list in enumerate(list_of_list):  # for index in range(len(list_of_list))
+     #   transp.append(nth_elements(list_of_list,index))
+    #return transp
+
+transpose(matrix)
