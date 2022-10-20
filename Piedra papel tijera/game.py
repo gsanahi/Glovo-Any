@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 from random import choice
 from play import Paper,Rock, Scissors, Lizard, Spock
 
@@ -8,7 +9,7 @@ def run_game():
     display_game()
     while True:
         #Nueva partida
-        user_play = get_user_play() #Jugada del usurio
+        user_play = get_user_play_dict() #Jugada del usurio
         comp_play = random_play()  #Jugada del ordenador
         display_match(user_play, comp_play) #muestro jugada
         winner = get_winner(user_play, comp_play) #averiguo vencedor
@@ -20,7 +21,7 @@ def run_game():
         resp = another_match()
         if resp == False:
             break
-    print(choice(["What's wrong with you?" , "Eres un Cobarde" ]))
+    print(choice(["What's wrong with you?" , "Eres un Cobarde", "buuuuu", "Gallina!" ]))
     
 def display_match(play1, play2):
     print(f'{play1.description()} vs {play2.description()}   FIGHT!\n')
@@ -47,6 +48,17 @@ def get_user_play():
     else:
         return Spock()
     
+def get_user_play_dict():
+    choice = get_user_response()
+    options = {
+        1 : Rock(),
+        2 : Paper(),
+        3 : Scissors(),
+        4 : Lizard(),
+        5 : Spock()
+    }
+    return options[choice]
+
 
 def get_user_response():
     """
