@@ -72,3 +72,29 @@ class Rock(Play):
         else:
             result = Result.WINS
         return result
+
+class Lizard(Play):
+    def description(Self):
+        return "Lizard"
+    def compare(self, otherPlay):
+        result = None
+        if type(otherPlay) == Lizard:
+            result = Result.EQUAL
+        elif type(otherPlay) == Rock or type(otherPlay) == Scissors:
+            result = Result.LOSES
+        else:
+            result = Result.WINS
+        return result
+
+class Spock(Play):
+    def description(Self):
+        return "Spock"
+    def compare(self, otherPlay):
+        result = None
+        if type(otherPlay) == Spock:
+            result = Result.EQUAL
+        elif type(otherPlay) == Paper or type(otherPlay) == Lizard:
+            result = Result.LOSES
+        else:
+            result = Result.WINS
+        return result
