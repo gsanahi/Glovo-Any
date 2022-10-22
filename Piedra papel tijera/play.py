@@ -80,7 +80,7 @@ class Lizard(Play):
     def beats(self):
         return {Spock(),Paper()}
 
-    def description(Self):
+    def description(self):
         return "Lizard"
 
 
@@ -88,6 +88,6 @@ class Spock(Play):
     def beats(self):
         return {Scissors(), Rock()}
 
-    def description(Self):
+    def description(self):
         return "Spock"
     
