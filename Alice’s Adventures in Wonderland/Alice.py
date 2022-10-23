@@ -18,22 +18,37 @@ def remove_stopwords(txt,wordsToRemove): #list[str], set[stopwords] -> Newlist [
 
 #print(remove_stopwords(alice,stopwords_set))
 
-names = ['hdb-','Annie Aa', 'Hola.', 'John PLG$', "Piggy Alpha CLa'", "here’s"]
+names = ['hdb--','Annie Aa', 'Hola.', 'John Psuffixes$', ] 
 
+suffixes = set(punctuation)
 
-def remove_punctuation(txt):
-    suffixes = list(string.punctuation)
-    new_names = []
-    for name in txt:
-        for suffix in suffixes:
-            if name.lower().endswith(suffix.lower()):
-                name = name[:-len(suffix)]
-                new_names.append(name)
+def remove_punctuation(palabra):#string ->string
+    if palabra[-1] in suffixes:
+        return remove_punctuation(palabra[0:-1])
     else:
-        new_names.append(name)
-    return new_names
-
-#print(remove_punctuation(names))
+        return palabra
 
 
+# def remove_apostrophe(palabra): #strig -> string
+#     if palabra[-2:] == "'s":
+#         return palabra[0:-2]
+#     return palabra
 
+# print(remove_apostrophe("Jorge's"))
+
+def remove_apostrophe(palabra: str): #strig -> string
+    return palabra.replace("'s","")
+
+def remove_suffix(palabra, suffix): #string,string(sufix) -> string
+    if (palabra[-len(suffix):] == suffix):
+        return palabra[:-len(suffix)]
+    return palabra
+
+
+def normalize(lst): #List[cadenas] -> List[cadenas]
+    lower = map(lambda x : x.lower(),lst)
+    without_stopwords = remove_stopwords(lower,stopwords_set)
+    without_punctuation = map(lambda x : remove_punctuation(x),without_stopwords)
+    without_apostrophe = map(lambda x : remove_apostrophe(x),without_punctuation)
+    return list(without_apostrophe)
+    
