@@ -20,7 +20,7 @@ def remove_stopwords(txt,wordsToRemove): #list[str], set[stopwords] -> Newlist [
 
 names = ['hdb—','Annie Aa', 'Hola.', 'John Psuffixes$', ] 
 
-suffixes = set(punctuation + "— ")
+suffixes = set(punctuation + "— ’”“'‘\"")
 
 def remove_punctuation(palabra):#string ->string
     if (palabra != "") and (palabra[-1] in suffixes):
@@ -50,8 +50,11 @@ def normalize(lst): #List[cadenas] -> List[cadenas]
     without_stopwords = remove_stopwords(lower,stopwords_set)
     without_punctuation = map(lambda x : remove_punctuation(x),without_stopwords)
     without_apostrophe = map(lambda x : remove_apostrophe(x),without_punctuation)
-    return list(without_apostrophe)
-
+    return list(filter(lambda x: x != "", without_apostrophe))
+    
+def sort(x):
+    return dict(sorted(x.items(), key=lambda item: item[1]))
+    
 def count_words(lst): #List -> dict
     dict = {}
     # Comprobar si esa palabra ya está en el diccionario
@@ -62,13 +65,22 @@ def count_words(lst): #List -> dict
         # Si no lo está, métela con el valor de 1    
         else:
             dict[palabra] = 1
-    return dict
+    return sort(dict)
     
 #print(count_words(normalize(alice)))  
 
 
+
 def word_probability(wordsCount):
     size = float(len(wordsCount))
-    return dict(map(lambda tupla : (tupla[0],tupla[1]/size),wordsCount.items()))
+    print(size)
+    print("===========================")
+    return dict(map(lambda tupla : (tupla[0],(tupla[1]/size)*100),wordsCount.items()))
     
-print(word_probability(count_words(normalize(alice))))
+#print(word_probability(count_words(normalize(alice))))
+
+def display_histogram(dict_probability): #Dict ->
+    for item in dict_probability.items():
+        print(f'{item[0]} : {"#"*int(item[1]/2)}') 
+
+display_histogram(word_probability(count_words(normalize(alice))))
