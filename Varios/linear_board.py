@@ -1,5 +1,5 @@
 from settings import BOARD_SIZE, VICTORY_STRIKE
-from list_utils import find_streak
+from Varios.list_utils import find_streak
 
 class LinearBoard:
     """

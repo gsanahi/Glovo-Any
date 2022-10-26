@@ -1,5 +1,5 @@
 from tkinter.tix import COLUMN
-from linear_board import LinearBoard
+from Varios.linear_board import LinearBoard
 from settings import BOARD_SIZE
 
 

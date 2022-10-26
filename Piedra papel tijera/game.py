@@ -68,32 +68,19 @@ def get_user_response():
     response = None
     while True:
         print("Chose your play:")
-        print("1. Rock ")
-        print("2. Paper ")
-        print("3. Scissors ")
-        print("4. Lizard ")
-        print("5. Spock")
-    
+        print("1. Rock \n2. Paper \n3. Scissors \n4. Lizard \n5. Spock")
+        
         raw = input("Enter 1, 2, 3, 4 or 5 \n")
         # validar raw
         raw = raw.strip()
-        if raw == "1":
-            response = 1
-            break
-        elif raw == "2":
-            response = 2
-            break
-        elif raw == "3":
-            response = 3
-            break
-        elif raw == "4":
-            response = 4
-            break
-        elif raw == "5":
-            response = 5
-            break
 
+        if raw == '1' or raw =='2' or raw =='3' or raw =='4' or raw =='5':
+            response =int(raw)
+            break
+        else:
+            print('Only the options I gave to you!')
     return response
+        
 
 def random_play():
     """

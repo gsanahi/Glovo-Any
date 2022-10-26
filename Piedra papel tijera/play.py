@@ -83,7 +83,7 @@ class Lizard(Play):
     def beats(self):
         return {Spock(),Paper()}
 
-    def description(Self):
+    def description(self):
         return "Lizard"
 
 
@@ -91,14 +91,6 @@ class Spock(Play):
     def beats(self):
         return {Scissors(), Rock()}
 
-    def description(Self):
+    def description(self):
         return "Spock"
-    def compare(self, otherPlay):
-        result = None
-        if type(otherPlay) == Spock:
-            result = Result.EQUAL
-        elif type(otherPlay) == Paper or type(otherPlay) == Lizard:
-            result = Result.LOSES
-        else:
-            result = Result.WINS
-        return result
+    
