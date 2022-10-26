@@ -49,6 +49,9 @@ class Play(object):
         '''
         return hash(self.description())
 
+        __lt__ 
+        __gt__ 
+
 
 class Paper(Play):
     def beats(self):
