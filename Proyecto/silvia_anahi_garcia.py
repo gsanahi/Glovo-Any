@@ -57,6 +57,6 @@ matrix = [[0,2,1,3,4,1],    #0
 
 m = [[],[],[],[],[]] 
 
-print(process_matrix(matrix))
-print(process_matrix(m))
+#print(process_matrix(matrix))
+#print(process_matrix(m))
 
