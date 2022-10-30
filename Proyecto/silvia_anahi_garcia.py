@@ -1,5 +1,14 @@
 def process_matrix(matrix):
     '''
+    Funcion para validar que los datos de la matriz sean los correctos. 
+    Esto es responsabilidad del frontend. 
+    '''
+    validity(matrix)
+    __process_matrix(matrix)   # Entro a la funcion propia del backend
+
+
+def __process_matrix(matrix):
+    '''
     Recibo una lista de lista de ints y devuelvo una nueva lista de listas de ints
     modificados (con el promedio de los vecinos segun corresponda)
     '''
@@ -44,19 +53,55 @@ def sum_neighbours(i,j,matrix): # num,num, Matrix -> num
 
     return round(my_value / neighbours,2)
 
+####### Funciones para validar #######
+
+def validity(matrix):
+    if not is_matrix(matrix):
+        raise ValueError('Only works on matrices')
+
+    if not is_row_same_length(matrix):
+        raise ValueError('Only works on rows with same length')
     
+    if not is_num(matrix):
+        raise ValueError('Only works on numerical matrices')
+
+def is_matrix(matrix):  
+    if not isinstance(matrix,list):
+            return False
+    for i in range(0,len(matrix)):
+        if not isinstance(matrix[i],list):
+            return False
+    return True  
+
+def is_row_same_length(matrix):
+    for i in range(0, len(matrix)-1):
+        if len(matrix[i]) != len(matrix[i+1]):
+            return False
+    return True
+
+def is_num(matrix):
+    for i in range (0,len(matrix)):
+        for j in range(0, len(matrix[i])):
+            if not isinstance(matrix[i][j],int):
+                return False
+        
+    return True   
 
 
-#Tests:
-matrix = [[0,2,1,3,4,1],    #0
-          [1,2,3,4,5,3],    #1
-          [2,2,3,1,0,5],    #2
-          [1,0,5,1,2,1],    #3
-          [1,7,2,0,3,9]]    #4
-        #  0 1 2 3 4 5 
+####Tests####
+test_valid_matrix = [[0,2,1,3,4,1],
+                     [1,2,3,4,5,3],
+                     [2,2,3,1,0,5],
+                     [1,0,5,1,2,1],
+                     [1,7,2,0,3,9]]    
 
-m = [[],[],[],[],[]] 
+test_valid_empty = [[],[],[],[],[]] 
 
-#print(process_matrix(matrix))
-#print(process_matrix(m))
+test_invalid_different_len = [[0,2,1,3,4,1],    
+                            [1,3,4,5,3],    
+                            [2]]
+
+test_invalid_type = [[0,2,1,3,4,1],['a']]
+
+
 

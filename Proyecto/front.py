@@ -1,18 +1,28 @@
-from matrix import process_matrix
+def validity(matrix):
+    return type_of(matrix) and is_equal(matrix) and is_num(matrix)
+            
+       
+def type_of(matrix):  
+    if not isinstance(matrix,list):
+            return False
+    for i in range(0,len(matrix)):
+        if not isinstance(matrix[i],list):
+            return False
+    return True  
 
-def in_numeral_matrix(matrix):   #List[list] -> Bool
-    validity = True
+def is_equal(matrix):
+    for i in range(0, len(matrix)-1):
+        if len(matrix[i]) != len(matrix[i+1]):
+            return False
+    return True
+
+def is_num(matrix):
     for i in range (0,len(matrix)):
-        if matrix[i]:               #Si no esta vacia, o sea si me da True
-            if len(matrix[i]) == len(matrix[i+1]):   #Compruebo que el tamaño de las listas sean iguales
-                    validity = True
-            for j in range(len(matrix[i])):         #Compruebo que todos los elementos sean del tipo Int
-                if isinstance(matrix[i][j], int):
-                    validity = True
-                
-        else:
-            validity = False
-    return validity
+        for j in range(0, len(matrix[i])):
+            if not isinstance(matrix[i][j],int):
+                return False
+        
+    return True
 
 
 
@@ -23,13 +33,14 @@ matrix = [[0,2,1,3,4,1],    #0
           [1,7,2,0,3,9]]    #4
         #  0 1 2 3 4 5 
 
-m = [[],[],[],[],[]] 
+m = [[], (0,5)] 
 
+x = [[0,2,1,3,4,1],    #0
+     [1,'a',3,4,5,3],    #1
+     [2]]
 # print(in_numeral_matrix(matrix))
 
 print("Test")
-arr = []
-for i in range(0, len(arr)):
-    print("Paso")
+print(validity(m))
 
 print("Fin test")

@@ -1,4 +1,18 @@
+from Proyecto.front import validity
+
+
 def process_matrix(matrix):
+    '''
+    Funcion para validar que los datos de la matriz sean los correctos. 
+    Esto es responsabilidad del frontend. 
+    '''
+    if validity(matrix):
+        return __process_matrix(matrix)   # Entro a la funcion propia del backend
+    else:
+        raise ValueError ('Only works on numerical matrices') #error
+
+
+def __process_matrix(matrix):
     '''
     Recibo una lista de lista de ints y devuelvo una nueva lista de listas de ints
     modificados (con el promedio de los vecinos segun corresponda)
