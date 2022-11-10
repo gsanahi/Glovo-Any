@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/contact.css">
     <title>Contact form</title>
-</head>
-<body>
+  </head>
+  <body>
     <form>
-        <input type="text" name="name" value="whats your name?">
+      <div class="form-group"><label>Name</label>
         <div>
-            <label>Name</label>
+          <input type="text" name="name" required>
         </div>
-        <input type="text" name="surname" value="whats your surname?">
+      </div>
+
+      <div class="form-group"><label>Surname</label>
         <div>
-            <label>Surname</label>
+          <input type="text" name="surname" required>
         </div>
-        <input type="number" name="phone" value="where can I call you?">
+      </div>
+
+      <div class="form-group"><label>Phone number</label>
         <div>
-            <label>Phone number</label>
+          <input type="number" name="phone" required>
         </div>
+      </div>
+
+      <div class="form-group">
+        <button> Send me</button>
+      </div>
     </form>
-</body>
+
+  </body>
 </html>

@@ -1,35 +1,47 @@
 :root{
     --mail-colour:rgb(238, 163, 230)
 }
+
+body {
+    font-family: sans-serif;
+}
+
 .menu {
     font-size: 1rem;
     background-color: var(--mail-colour);
     margin: 15px;
     padding: 10px;
-    }
-
-    .menu ul li {
-        background-color: var(--mail-colour);
-        display: inline;
-        font-style: normal;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .main-title {
-        text-align: center;
-        font-size: 35px;
-    }
-
-#myself {
-    width: 20%;
-    height: 20%;
-    margin: 20px;
-    padding: 10px;
-    max-width: 30%;
 }
 
-#description {
+.menu ul li {
+    background-color: var(--mail-colour);
+    display: inline;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 35px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.profile img {
+    margin: 20px;
+    padding: 10px;
+    max-width: 16rem;
+}
+
+.description {
+    display: inline;
     text-align: left;
     font-size: 2rem;
     background-color: #fff;
@@ -38,35 +50,4 @@
 }
 
 
-
-
-
-
-
-
-
-a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 8px 16px;
-    }
-    
-a:hover {
-background-color: #ddd;
-color: black;
-}
-
-.previous {
-background-color: #570505;
-color: black;
-size: 2rem;
-}
-
-.next {
-background-color: #0c0e86;
-color: white;
-}
-
-.round {
-border-radius: 50%;
-}
+  
