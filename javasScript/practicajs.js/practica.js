@@ -15,4 +15,4 @@ const students = [{
   const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
   const availableGenders = ['male', 'female'];
 
-  
+  console.log(students)
