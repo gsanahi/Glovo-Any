@@ -1,148 +1,276 @@
-function calculateRandonNum (min,max) {
-    const randomNum = Math.floor(Math.random() * (max-min + 1)) + min;
-    return randomNum;
+import readline from "readline";
+
+const students = [
+  {
+    age: 32,
+    examScores: [],
+    gender: "male",
+    name: "edu",
+  },
+  {
+    age: 29,
+    examScores: [],
+    gender: "female",
+    name: "silvia",
+  },
+];
+
+const availableMaleNames = [
+  "pepe",
+  "juan",
+  "victor",
+  "Leo",
+  "francisco",
+  "carlos",
+];
+const availableFemaleNames = [
+  "cecilia",
+  "ana",
+  "luisa",
+  "silvia",
+  "isabel",
+  "virginia",
+];
+const availableGenders = ["male", "female"];
+
+/*
+ * Funciones auxiliares
+ */
+
+// Calcula un numero random incluyendo min y max
+function calculateRandomNum(min, max) {
+  const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomNum;
 }
 
-function random_item(items){
-    return items[Math.floor(Math.random()*items.length)];
+function random_item(items) {
+  return items[calculateRandomNum(0, items.length - 1)];
 }
 
-//1- Mostrar en formato de tabla todos los alumnos.
+function isGirl(student) {
+  return student.gender === "female";
+}
 
-console.table(students)
-//2- Mostrar por consola la cantidad de alumnos que hay en clase.
+// 1- Mostrar en formato de tabla todos los alumnos.
+function ej1() {
+  console.table(students);
+}
 
-console.log(students.length)
+// 2- Mostrar por consola la cantidad de alumnos que hay en clase.
+function ej2() {
+  console.log(students.length);
+}
 
-3- Mostrar por consola todos los nombres de los alumnos.
-for (let i=0; i<students.length;i++){
+// 3- Mostrar por consola todos los nombres de los alumnos.
+function ej3() {
+  for (let i = 0; i < students.length; i++) {
     console.log(students[i].name);
+  }
 }
 
-4- Eliminar el último alumno de la clase.
-
-students.pop()
-
-5- Eliminar un alumno aleatoriamente de la clase.
-students.shift(calculateRandonNum(0,students.length))
-
-6- Mostrar por consola todos los datos de los alumnos que son chicas.
-for (let i=0; i<students.length;i++) {
-    if (students.gender === 'female'){
-        console.log(students[i])
-    }
+// 4- Eliminar el último alumno de la clase.
+function ej4() {
+  students.pop();
 }
 
+// 5- Eliminar un alumno aleatoriamente de la clase.
+function ej5() {
+  students.splice(calculateRandomNum(0, students.length - 1), 1);
+}
 
-7- Mostrar por consola el número de chicos y chicas que hay en la clase.
-let boys = 0
-let girls = 0
+// 6- Mostrar por consola todos los datos de los alumnos que son chicas.
+function ej6() {
+  students
+    .filter((student) => student.gender === "female")
+    .forEach((student) => console.log(student));
+}
 
-for (let i=0; i<students.length;i++) {
-    if (students.gender === 'female'){
-        girls += 1
+// 7- Mostrar por consola el número de chicos y chicas que hay en la clase.
+function ej7() {
+  let boys = 0;
+  let girls = 0;
+
+  for (let i = 0; i < students.length; i++) {
+    if (isGirl(students[i])) {
+      girls += 1;
     } else {
-        boys +=1
+      boys += 1;
     }
-console.log('Total boys:' + boys + 'Total girls:' + girls)
+    console.log("Total boys:" + boys + "Total girls:" + girls);
+  }
 }
 
-8- Mostrar true o false por consola si todos los alumnos de la clase son chicas.
-function isGirl() {
-    return students.gender === 'female'
+// 8- Mostrar true o false por consola si todos los alumnos de la clase son chicas.
+function ej8() {
+  console.log(students.every(isGirl));
 }
-console.log(students.every(isGirl(students)))
 
-9- Mostrar por consola los nombres de los alumnos que tengan entre 20 y 25 años.
-for (let i=0; i<students.length;i++){
+// 9- Mostrar por consola los nombres de los alumnos que tengan entre 20 y 25 años.
+function ej9() {
+  for (let i = 0; i < students.length; i++) {
     if (students.age >= 20 && students.age <= 25) {
-        console.log(students.name)
+      console.log(students[i].name);
     }
+  }
 }
 
-
-10- Añadir un alumno nuevo con los siguientes datos:
-nombre aleatorio.
-edad aleatoria entre 20 y 50 años.
-género aleatorio.
-listado de calificaciones vacío.
-¡OJO!, el nombre y el género tienen que ir acordes.
-
-const newStudent = {...students[0]}
-newStudent.gender = random_item(availableGenders)
-newStudent.name = if (newStudent.gender === 'male') {
-    random_item(availableMaleNames)
-} else {
-    random_item(availableFemaleNames)
+// 10- Añadir un alumno nuevo con los siguientes datos:
+// nombre aleatorio.
+// edad aleatoria entre 20 y 50 años.
+// género aleatorio.
+// listado de calificaciones vacío.
+// ¡OJO!, el nombre y el género tienen que ir acordes.
+function ej10() {
+  const newStudent = {};
+  newStudent.gender = random_item(availableGenders);
+  newStudent.name =
+    newStudent.gender === "male"
+      ? random_item(availableMaleNames)
+      : random_item(availableFemaleNames);
+  newStudent.age = calculateRandomNum(20, 50);
+  newStudent.examScores = [];
+  students.push(newStudent);
 }
 
-newStudent.age = calculateRandonNum(20,50)
-newStudent.examScores = []
-
-
-11- Mostrar por consola el nombre de la persona más joven de la clase.
-¡OJO!, si varias personas de la clase comparten la edad más baja, cualquiera
-de ellos es una respuesta válida.
-
-let youngest= student.age.reduce(function(a,b){return a > b;});
-
-const menor = students.find(students.age > 1);
-console.log(menor);
-
-
-12- Mostrar por consola la edad media de todos los alumnos de la clase.
-let ages = []
-for (let i=0; i<students.length;i++) {
-    ages += students.age
+// 11- Mostrar por consola el nombre de la persona más joven de la clase.
+// ¡OJO!, si varias personas de la clase comparten la edad más baja, cualquiera
+// de ellos es una respuesta válida.
+function ej11() {
+  const youngest = students.reduce((a, b) => a.age < b.age);
+  console.log(youngest.name);
 }
 
-students.age.forEach(i => ages += students.age )
+// 12- Mostrar por consola la edad media de todos los alumnos de la clase.
+function ej12() {
+  const ages = students.map((student) => student.age).reduce((a, b) => a + b);
+  console.log(ages / students.length);
+}
 
-console.log(ages/students.length)
+// 13- Mostrar por consola la edad media de las chicas de la clase.
+function ej13() {
+  const girls = students.filter(isGirl);
+  const ages = girls.map((student) => student.age).reduce((a, b) => a + b);
+  console.log(ages / students.length);
+}
 
-13- Mostrar por consola la edad media de las chicas de la clase.
-let ages = []
-let amount = 0
-for (let i=0; i<students.length;i++) {
-    if (students.gender === 'female') {
-        ages += students.age
-        amount += 1
+// 14- Añadir nueva nota a los alumnos. Por cada alumno de la clase,
+// tendremos que calcular una nota de forma aleatoria(número entre 0 y 10) y
+// añadirla a su listado de notas.
+function ej14() {
+  students.forEach((student) => {
+    student.examScores.push(calculateRandomNum(0, 10));
+  });
+}
+
+// // 15- Ordenar el array de alumnos alfabéticamente según su nombre.
+function ej15() {
+  students.sort((a, b) => a.name - b.name);
+}
+
+// Requisitos opcionales
+// Os recomiendo encarecidamente que los intentéis, no son difíciles!
+
+// 16- Mostrar por consola el alumno de la clase con las mejores notas.
+// El alumno con mejores notas es aquel cuyo sumatorio de todas sus notas
+// es el valor más alto de todos.
+function sumNotes(student) {
+  return student.examScores.reduce((a, b) => a + b);
+}
+
+function ej16() {
+  console.log(students.reduce((a, b) => (sumNotes(a) > sumNotes(b) ? a : b)));
+}
+
+// 17- Mostrar por consola la nota media más alta de la clase y el nombre del
+// alumno al que pertenece.
+function meanNotes(student) {
+  return student.examScores.reduce((a, b) => a + b) / student.examScores.length;
+}
+
+function ej17() {
+  console.log(students.reduce((a, b) => (meanNotes(a) > meanNotes(b) ? a : b)));
+}
+
+// 18- Añadir un punto extra a cada nota existente de todos los alumnos.
+// Recordad que la nota máxima posible es 10. Si los alumnos
+// aún no tienen registrada ninguna nota, les pondremos un 10.
+function ej18() {
+  for (let i = 0; i < students.length; i++) {
+    const student = students[i];
+    if (student.examScores.length === 0) {
+      student.examScores.push(10);
+    } else {
+      student.examScores = student.examScores.map((score) =>
+        Math.min(score + 1, 10)
+      );
     }
+  }
 }
 
-console.log(ages/amount)
-
-
-14- Añadir nueva nota a los alumnos. Por cada alumno de la clase, 
-tendremos que calcular una nota de forma aleatoria(número entre 0 y 10) y 
-añadirla a su listado de notas.
-
-for (let i=0; i<students.length;i++){
-     students.examScores.push(calculateRandonNum(0,10));    
+function main() {
+  let input;
+  while (input !== 0) {
+    input = readline("Ingrese una opción de la 1 a la 18 o 0 para salir");
+    switch (input) {
+      case 1:
+        ej1();
+        break;
+      case 2:
+        ej2();
+        break;
+      case 3:
+        ej3();
+        break;
+      case 4:
+        ej4();
+        break;
+      case 5:
+        ej5();
+        break;
+      case 6:
+        ej6();
+        break;
+      case 7:
+        ej7();
+        break;
+      case 8:
+        ej8();
+        break;
+      case 9:
+        ej9();
+        break;
+      case 10:
+        ej10();
+        break;
+      case 11:
+        ej11();
+        break;
+      case 12:
+        ej12();
+        break;
+      case 13:
+        ej13();
+        break;
+      case 14:
+        ej14();
+        break;
+      case 15:
+        ej15();
+        break;
+      case 16:
+        ej16();
+        break;
+      case 17:
+        ej17();
+        break;
+      case 18:
+        ej18();
+        break;
+      default:
+        console.log("Ingrese una opcion valida");
+        break;
+    }
+  }
 }
 
-students.examScores.forEach(element => {
-    students.examScores.push(calculateRandonNum(0,10)); 
-});
-
-
-15- Ordenar el array de alumnos alfabéticamente según su nombre.
-students.name.sort()
-
-Requisitos opcionales
-Os recomiendo encarecidamente que los intentéis, no son difíciles!
-
-16- Mostrar por consola el alumno de la clase con las mejores notas.
-El alumno con mejores notas es aquel cuyo sumatorio de todas sus notas
-es el valor más alto de todos.
-
-let best_note = student.examScores.reduce(function(a,b){return a + b;});
-
-
-17- Mostrar por consola la nota media más alta de la clase y el nombre del 
-alumno al que pertenece.
-18- Añadir un punto extra a cada nota existente de todos los alumnos. 
-Recordad que la nota máxima posible es 10. Si los alumnos 
-aún no tienen registrada ninguna nota, les pondremos un 10.
-
-
+main();
