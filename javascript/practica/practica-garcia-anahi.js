@@ -1,4 +1,4 @@
-import readline from "readline";
+const readline = require("readline");
 
 const students = [
   {
@@ -19,7 +19,7 @@ const availableMaleNames = [
   "pepe",
   "juan",
   "victor",
-  "Leo",
+  "leo",
   "francisco",
   "carlos",
 ];
@@ -96,8 +96,8 @@ function ej7() {
     } else {
       boys += 1;
     }
-    console.log("Total boys:" + boys + "Total girls:" + girls);
   }
+  console.log("Total boys:" + boys + "Total girls:" + girls);
 }
 
 // 8- Mostrar true o false por consola si todos los alumnos de la clase son chicas.
@@ -108,7 +108,7 @@ function ej8() {
 // 9- Mostrar por consola los nombres de los alumnos que tengan entre 20 y 25 años.
 function ej9() {
   for (let i = 0; i < students.length; i++) {
-    if (students.age >= 20 && students.age <= 25) {
+    if (students[i].age >= 20 && students[i].age <= 25) {
       console.log(students[i].name);
     }
   }
@@ -136,7 +136,7 @@ function ej10() {
 // ¡OJO!, si varias personas de la clase comparten la edad más baja, cualquiera
 // de ellos es una respuesta válida.
 function ej11() {
-  const youngest = students.reduce((a, b) => a.age < b.age);
+  const youngest = students.reduce((a, b) => (a.age < b.age ? a : b));
   console.log(youngest.name);
 }
 
@@ -150,7 +150,7 @@ function ej12() {
 function ej13() {
   const girls = students.filter(isGirl);
   const ages = girls.map((student) => student.age).reduce((a, b) => a + b);
-  console.log(ages / students.length);
+  console.log(ages / girls.length);
 }
 
 // 14- Añadir nueva nota a los alumnos. Por cada alumno de la clase,
@@ -164,7 +164,7 @@ function ej14() {
 
 // // 15- Ordenar el array de alumnos alfabéticamente según su nombre.
 function ej15() {
-  students.sort((a, b) => a.name - b.name);
+  students.sort((a, b) => (a.name > b.name ? 1 : -1));
 }
 
 // Requisitos opcionales
@@ -178,7 +178,9 @@ function sumNotes(student) {
 }
 
 function ej16() {
-  console.log(students.reduce((a, b) => (sumNotes(a) > sumNotes(b) ? a : b)));
+  console.log(
+    students.reduce((a, b) => (sumNotes(a) > sumNotes(b) ? a : b)).name
+  );
 }
 
 // 17- Mostrar por consola la nota media más alta de la clase y el nombre del
@@ -188,7 +190,14 @@ function meanNotes(student) {
 }
 
 function ej17() {
-  console.log(students.reduce((a, b) => (meanNotes(a) > meanNotes(b) ? a : b)));
+  const student = students.reduce((a, b) =>
+    meanNotes(a) > meanNotes(b) ? a : b
+  );
+  console.log(
+    `Nota media mas alta es ${meanNotes(student)} y le pertenece a ${
+      student.name
+    }`
+  );
 }
 
 // 18- Añadir un punto extra a cada nota existente de todos los alumnos.
@@ -207,11 +216,26 @@ function ej18() {
   }
 }
 
-function main() {
+const rl = readline.createInterface(process.stdin, process.stdout);
+
+function getNumberfromConsole() {
+  const promise = new Promise((resolve, reject) => {
+    rl.question(
+      "Ingrese una opción de la 1 a la 18 o 0 para salir\n",
+      (num) => {
+        rl.pause();
+        resolve(num);
+      }
+    );
+  });
+  return promise;
+}
+
+async function main() {
   let input;
   while (input !== 0) {
-    input = readline("Ingrese una opción de la 1 a la 18 o 0 para salir");
-    switch (input) {
+    input = await getNumberfromConsole();
+    switch (Number(input)) {
       case 1:
         ej1();
         break;
